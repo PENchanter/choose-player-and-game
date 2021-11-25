@@ -18,7 +18,7 @@ If FileExist(A_ScriptDir . "\" . "Gw2.dat")
 ;	GameChoice := "GUILD WARS 2"						; leave here for reference
 If FileExist(A_ScriptDir . "\" . "SWTORLaunch.dll")
 	DefaultChoice = Choose2
-;	GameChoice := "SWTOR"								; leave here for reference
+;	GameChoice := "SWTOR"							; leave here for reference
 
 Gui, AHKGameClippy:+AlwaysOnTop
 ; Gui, Add, Picture, x-8 y0 w525 h200, RAINBOWPastelRainbowSwirl525x200.png
@@ -94,12 +94,21 @@ If (GameChoice	 = "GUILD WARS 2")
 	GameChoice	:= "GUILDWARS2"
 
 GameChoices := "GUILDWARS2,SWTOR,VALHEIM"
+
+; vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv 
+; vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv The following stopped working at some point.
+; vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv 
+
 Loop, parse, GameChoices, `,
 {
 	If (GameChoices = A_LoopField)
 		If IsLabel(A_LoopField)
 			GoSub %A_LoopField%
 }
+
+; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ It was going to the appropriate chosen game's subroutine,
+; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ but something happened and I cannot figure out what exactly.
 
 MsgBox, 4096, Status?, GameChoice = %GameChoice%`nGameChoices = %GameChoices%`nv_gamepath = %v_gamepath%
 ExitApp
